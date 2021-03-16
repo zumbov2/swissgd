@@ -74,7 +74,7 @@ swissgd::show_preview("ch.are.erreichbarkeit-oev")
 ```
 
 ## `get_stac_collections`
-It displays a description of all data provided via the [Spatial Temporal Asset Catalog (STAC) REST Interface](https://data.geo.admin.ch/api/stac/v0.9/collections) on the geo-information platform.
+Displays a description of all data provided via the [Spatial Temporal Asset Catalog (STAC) REST Interface](https://data.geo.admin.ch/api/stac/v0.9/collections) on the geo-information platform (currently 10).
 
 ``` r
 swissgd::get_stac_collections()
@@ -95,5 +95,23 @@ swissgd::get_stac_collections()
 #> # ... with 1 more variable: license <chr>
 ```
 
-<sup>Created on 2021-03-16 by the [reprex package](https://reprex.tidyverse.org) (v1.0.0)</sup>
+## `get_stac_collections`
+Calls the STAC API on the geo-information platform and returns the download links to geo-specific assets. Here the aerial photo with a ground resolution of 10 cm of a part of my hometown Aarau is queried. WGS84, LV03 and LV95 coordinates are possible.
+
+``` r
+swissgd::get_stac_assets(
+    collection_id = "ch.swisstopo.swissimage-dop10", 
+    lon = 645685, 
+    lat = 249287
+    )
+
+#> # A tibble: 2 x 7
+#>   type      href      created  updated  `eo:gsd` `proj:epsg` `checksum:multihas~
+#>   <chr>     <chr>     <chr>    <chr>       <dbl>       <int> <chr>              
+#> 1 image/ti~ https://~ 2021-02~ 2021-02~      2          2056 122053DCAE0197F524~
+#> 2 image/ti~ https://~ 2021-02~ 2021-02~      0.1        2056 12208825F4C065E9FA~
+```
+
+## `download_stac_collections`
+Downloads assets from the STAC API that were previously queried with a `get_stac_assets()` call.
 
