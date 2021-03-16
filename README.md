@@ -23,7 +23,7 @@ Retrieves the names of all available datasets (currently 545).
 
 ``` r
 swissgd::get_available_geodata()
-#> 
+
 #> # A tibble: 545 x 2
 #>    name                                     retrieval_function         
 #>    <chr>                                    <chr>                      
@@ -39,3 +39,21 @@ swissgd::get_available_geodata()
 #> 10 ch.are.reisezeit-agglomerationen-miv     swissgd::download_geodata()
 #> # ... with 535 more rows
 ```
+
+## `search_geodata`
+Searches for matches to argument `pattern` within the names of all available datasets on the geo-information platform.
+
+``` r
+swissgd::search_geodata(pattern = "ÖV")
+
+#> # A tibble: 6 x 2
+#>   name                                     retrieval_function         
+#>   <chr>                                    <chr>                      
+#> 1 ch.are.erreichbarkeit-oev                swissgd::download_geodata()
+#> 2 ch.are.gueteklassen_oev                  swissgd::download_geodata()
+#> 3 ch.are.reisezeit-agglomerationen-oev     swissgd::download_geodata()
+#> 4 ch.are.reisezeit-oev                     swissgd::download_geodata()
+#> 5 ch.bav.haltestellen-oev                  swissgd::download_geodata()
+#> 6 ch.bav.kataster-belasteter-standorte-oev swissgd::download_geodata()
+```
+
