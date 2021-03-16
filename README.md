@@ -13,11 +13,12 @@ Install from GitHub for a regularly updated version (latest: 0.1.0):
 ```r
 install.packages("devtools")
 devtools::install_github("zumbov2/swissgd")
+
 ```
 
 # Functions
 
-##`get_available_geodata`
+## `get_available_geodata`
 Retrieves the names of all available datasets (currently 545).
 
 ``` r
