@@ -19,7 +19,7 @@ devtools::install_github("zumbov2/swissgd")
 # Functions
 
 ## `get_available_geodata`
-Retrieves the names of all available datasets (currently 545).
+Retrieves the names of all available datasets (currently 545) and returns the function (`download_geodata()` or `get_stac_assets()`)to obtain them.
 
 ``` r
 swissgd::get_available_geodata()
@@ -41,7 +41,7 @@ swissgd::get_available_geodata()
 ```
 
 ## `search_geodata`
-Searches for matches to argument `pattern` within the names of all available datasets on the geo-information platform.
+Searches for matches to argument `pattern` within the names of available datasets on the geo-information platform.
 
 ``` r
 swissgd::search_geodata(pattern = "ÖV")
@@ -56,4 +56,21 @@ swissgd::search_geodata(pattern = "ÖV")
 #> 5 ch.bav.haltestellen-oev                  swissgd::download_geodata()
 #> 6 ch.bav.kataster-belasteter-standorte-oev swissgd::download_geodata()
 ```
+
+``` r
+swissgd::search_geodata("Alti")
+
+#> # A tibble: 1 x 2
+#>   name                     retrieval_function        
+#>   <chr>                    <chr>                     
+#> 1 ch.swisstopo.swissalti3d swissgd::get_stac_assets()
+```
+
+## `show_metadata` and `swissgd::show_preview`
+These functions can be used to visit the entry of a dataset in the [Swiss Geometadata Catalogue](https://www.geocat.admin.ch) and preview the data on [mapping platform of the Swiss Confederation](https://map.geo.admin.ch).
+``` r
+swissgd::show_metadata("ch.are.erreichbarkeit-oev")
+swissgd::show_preview("ch.are.erreichbarkeit-oev")
+```
+
 
