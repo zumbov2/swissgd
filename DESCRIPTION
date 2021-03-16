@@ -1,0 +1,22 @@
+Package: swissgd
+Type: Package
+Title: Interface to the Geo-Information Platform of the Swiss
+        Confederation
+Version: 0.1.0
+Authors@R: person("David", "Zumbach", , "david.zumbach@gfzb.ch", c("aut", "cre"))
+Description: Search and download data from the geo-information platform of the 
+    Swiss Confederation (see <data.geo.admin.ch>) and query data from the
+    Spatial Temporal Asset Catalog (STAC) API (see <https://data.geo.admin.ch/api/stac/v0.9/>).
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+BugReports: https://github.com/zumbov2/swissgd/issues
+URL:
+        https://www.geo.admin.ch/en/geo-services/geo-services/terms-of-use.html
+RoxygenNote: 7.1.1
+Imports: dplyr, httr, magrittr, purrr, rvest, stringr, tibble, tidyr,
+        xml2, sf
+NeedsCompilation: no
+Packaged: 2021-03-16 07:29:17 UTC; david
+Author: David Zumbach [aut, cre]
+Maintainer: David Zumbach <david.zumbach@gfzb.ch>
