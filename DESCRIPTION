@@ -17,6 +17,6 @@ RoxygenNote: 7.1.1
 Imports: dplyr, httr, magrittr, purrr, rvest, stringr, tibble, tidyr,
         xml2, sf
 NeedsCompilation: no
-Packaged: 2021-03-16 07:29:17 UTC; david
+Packaged: 2021-03-16 13:05:42 UTC; david
 Author: David Zumbach [aut, cre]
 Maintainer: David Zumbach <david.zumbach@gfzb.ch>

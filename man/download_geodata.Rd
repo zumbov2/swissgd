@@ -32,6 +32,4 @@ The acquisition and use of data or services is free of charge,
 download_geodata("ch.are.reisezeit-oev")
 }
 
-#' @export
-
 }

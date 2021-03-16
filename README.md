@@ -73,6 +73,11 @@ swissgd::show_metadata("ch.are.erreichbarkeit-oev")
 swissgd::show_preview("ch.are.erreichbarkeit-oev")
 ```
 
+## `search_geodata`
+Searches for matches to argument `pattern` within the names of available datasets on the geo-information platform.
+
+
+
 ## `get_stac_collections`
 Displays a description of all data provided via the [Spatial Temporal Asset Catalog (STAC) REST Interface](https://data.geo.admin.ch/api/stac/v0.9/collections) on the geo-information platform (currently 10).
 

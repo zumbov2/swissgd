@@ -24,7 +24,7 @@
 #' download_geodata("ch.are.reisezeit-oev")
 #' }
 #'
-#' #' @export
+#' @export
 #'
 download_geodata <- function(dataset, path, unzip = TRUE, available_geodata) {
 
