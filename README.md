@@ -14,3 +14,27 @@ Install from GitHub for a regularly updated version (latest: 0.1.0):
 install.packages("devtools")
 devtools::install_github("zumbov2/swissgd")
 ```
+
+# Functions
+
+##`get_available_geodata`
+Retrieves the names of all available datasets (currently 545).
+
+``` r
+swissgd::get_available_geodata()
+#> 
+#> # A tibble: 545 x 2
+#>    name                                     retrieval_function         
+#>    <chr>                                    <chr>                      
+#>  1 ch.are.agglomerationsverkehr             swissgd::download_geodata()
+#>  2 ch.are.alpenkonvention                   swissgd::download_geodata()
+#>  3 ch.are.belastung-personenverkehr-bahn    swissgd::download_geodata()
+#>  4 ch.are.belastung-personenverkehr-strasse swissgd::download_geodata()
+#>  5 ch.are.erreichbarkeit-miv                swissgd::download_geodata()
+#>  6 ch.are.erreichbarkeit-oev                swissgd::download_geodata()
+#>  7 ch.are.gemeindetypen                     swissgd::download_geodata()
+#>  8 ch.are.gueteklassen_oev                  swissgd::download_geodata()
+#>  9 ch.are.landschaftstypen                  swissgd::download_geodata()
+#> 10 ch.are.reisezeit-agglomerationen-miv     swissgd::download_geodata()
+#> # ... with 535 more rows
+```
