@@ -19,7 +19,7 @@ devtools::install_github("zumbov2/swissgd")
 # Functions
 
 ## `get_available_geodata`
-Retrieves the names of all available datasets (currently 545) and returns the function (`download_geodata()` or `get_stac_assets()`)to obtain them.
+Retrieves the names of all available datasets (currently 545) and returns the function (`download_geodata()` or `get_stac_assets()`) to obtain them.
 
 ``` r
 swissgd::get_available_geodata()
@@ -66,11 +66,34 @@ swissgd::search_geodata("Alti")
 #> 1 ch.swisstopo.swissalti3d swissgd::get_stac_assets()
 ```
 
-## `show_metadata` and `swissgd::show_preview`
+## `show_metadata` and `show_preview`
 These functions can be used to visit the entry of a dataset in the [Swiss Geometadata Catalogue](https://www.geocat.admin.ch) and preview the data on [mapping platform of the Swiss Confederation](https://map.geo.admin.ch).
 ``` r
 swissgd::show_metadata("ch.are.erreichbarkeit-oev")
 swissgd::show_preview("ch.are.erreichbarkeit-oev")
 ```
 
+## `get_stac_collections`
+It displays a description of all data provided via the [Spatial Temporal Asset Catalog (STAC) REST Interface](https://data.geo.admin.ch/api/stac/v0.9/collections) on the geo-information platform.
+
+``` r
+swissgd::get_stac_collections()
+
+#> # A tibble: 10 x 11
+#>    title id    description udated bbox1 bbox2 bbox3 bbox4 interval1 interval2
+#>    <chr> <chr> <chr>       <chr>  <dbl> <dbl> <dbl> <dbl> <chr>     <chr>    
+#>  1 swis~ ch.s~ swissALTI3~ 2021-~  5.95  45.7 10.5   47.8 2019-01-~ 2020-01-~
+#>  2 swis~ ch.s~ swissTLM3D~ 2021-~  5.35  45.6 11.5   48.3 2020-03-~ 2020-03-~
+#>  3 swis~ ch.s~ swissBUILD~ 2021-~  5.94  45.8 10.5   47.8 2018-07-~ 2020-10-~
+#>  4 SWIS~ ch.s~ The orthop~ 2021-~  5.95  45.8 10.5   47.8 2017-01-~ 2020-01-~
+#>  5 Nati~ ch.s~ The 1:10,0~ 2021-~  5.88  45.8 10.6   47.8 2020-01-~ 2020-01-~
+#>  6 Nati~ ch.s~ The Nation~ 2021-~  5.87  45.7 10.9   47.9 2007-01-~ 2018-01-~
+#>  7 Nati~ ch.s~ The Nation~ 2021-~  5.87  45.8 10.7   47.9 1984-01-~ 2018-01-~
+#>  8 Nati~ ch.s~ The Nation~ 2021-~  5.85  45.7 11.4   47.9 2012-01-~ 2019-01-~
+#>  9 Nati~ ch.s~ The Nation~ 2021-~  5.60  45.5 10.7   48.0 2019-01-~ 2019-01-~
+#> 10 swis~ ch.s~ swissSURFA~ 2021-~  5.95  45.8  9.68  47.8 2015-01-~ 2020-01-~
+#> # ... with 1 more variable: license <chr>
+```
+
+<sup>Created on 2021-03-16 by the [reprex package](https://reprex.tidyverse.org) (v1.0.0)</sup>
 
