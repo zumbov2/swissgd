@@ -95,7 +95,7 @@ swissgd::get_stac_collections()
 #> # ... with 1 more variable: license <chr>
 ```
 
-## `get_stac_collections`
+## `get_stac_assets`
 Calls the STAC API on the geo-information platform and returns the download links to geo-specific assets. Here the aerial photo with a ground resolution of 10 cm of a part of my hometown Aarau is queried. WGS84, LV03 and LV95 coordinates are possible.
 
 ``` r
@@ -112,6 +112,20 @@ swissgd::get_stac_assets(
 #> 2 image/ti~ https://~ 2021-02~ 2021-02~      0.1        2056 12208825F4C065E9FA~
 ```
 
-## `download_stac_collections`
+## `download_stac_assets`
 Downloads assets from the STAC API that were previously queried with a `get_stac_assets()` call.
+
+``` r
+res <- swissgd::get_stac_assets(
+  collection_id = "ch.swisstopo.swissimage-dop10",
+  lon = 645685,
+  lat = 249287
+  )
+
+swissgd::download_stac_assets(res)
+```
+
+
+
+
 
