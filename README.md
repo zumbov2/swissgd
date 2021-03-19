@@ -135,8 +135,8 @@ swissgd::download_stac_assets(res)
 # Examples
 
 ## Spatial distribution of place name suffixes
-*Datasets:* ch.swisstopo.swissnames3d, ch.swisstopo.swissboundaries3d-land-flaeche.fill
-*Packages:* `sf`, `raster`, `btb`, `ggplot2` etc.
+**Datasets:** ch.swisstopo.swissnames3d, ch.swisstopo.swissboundaries3d-land-flaeche.fill  
+**Packages:** `sf`, `raster`, `btb`, `ggplot2` and friends
 
 <img src="https://github.com/zumbov2/swissgd/blob/master/examples/ex1_ikon.png" width="300">  
 <img src="https://github.com/zumbov2/swissgd/blob/master/examples/ex1_berg_mont.png" width="300">  
