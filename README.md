@@ -138,9 +138,9 @@ swissgd::download_stac_assets(res)
 ## Spatial distribution of place name suffixes
 ### Setup
 **Idea**: Examine and visualise the spatial distribution of place name suffixes using spatial kernel density estimation.
-**Script**: [ex1_swissnames.R](https://github.com/zumbov2/swissgd/blob/main/examples/ex1_swissnames.R)  
 **Datasets**: ch.swisstopo.swissnames3d, ch.swisstopo.swissboundaries3d-land-flaeche.fill  
 **Packages**: `sf`, `raster`, `btb`, `ggplot2` and friends
+**Script**: [ex1_swissnames.R](https://github.com/zumbov2/swissgd/blob/main/examples/ex1_swissnames.R)  
 
 ### Some Results
 <img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_1.png" width="600">  
