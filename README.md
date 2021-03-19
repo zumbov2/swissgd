@@ -138,8 +138,8 @@ swissgd::download_stac_assets(res)
 **Datasets:** ch.swisstopo.swissnames3d, ch.swisstopo.swissboundaries3d-land-flaeche.fill  
 **Packages:** `sf`, `raster`, `btb`, `ggplot2` and friends
 
-<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_ikon.png" width="300">  
-<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_ikon.png" width="300">  
+<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_ikon.png" width="600">  
+<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_berg_mont.png" width="600">  
 
 
 
