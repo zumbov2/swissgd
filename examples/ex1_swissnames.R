@@ -61,14 +61,14 @@ endings_selection <- c(
   )
 
 # Detect endings in place names...
-ending_detect <- purrr::map_dfc(
+endings_detection <- purrr::map_dfc(
   paste0(endings_selection, "$"),
-  function(x) str_detect(tolower(orte$NAME), x)
+  function(x) str_detect(tolower(places$NAME), x)
   )
 
 # ...bind to dataset and reduce geoms to points
-names(ending_detect) <- endings_selection
-places <- bind_cols(places, ending_detect) %>%
+names(endings_detection) <- endings_selection
+places <- bind_cols(places, endings_detection) %>%
   st_point_on_surface()
 
 # Get national border as bounding --------------------------------------------
@@ -151,8 +151,40 @@ endings_kernels <- purrr::map_dfr(
 
 # Visualize ----------------------------------------------------------------
 
-# ikon
+# -hof
 p1 <- endings_kernels %>%
+  filter(ending == "-hof") %>%
+  mutate(density = density / max(density)) %>%
+  ggplot() +
+  geom_sf(fill = "grey90", color = NA) +
+  geom_sf(aes(fill = density, alpha = density), color = NA) +
+  scale_fill_viridis_c(option = "magma", direction = -1, na.value = "white") +
+  scale_alpha_continuous(range = c(0, 1)) +
+  labs(
+    title = "Distribution of the place name suffix -hof",
+    subtitle = "Spatial kernel density estimation",
+    caption = "Datasets: ch.swisstopo.swissnames3d, ch.swisstopo.swissboundaries3d
+Method: btb::kernelSmoothing with a grid resolution of 1km and a bandwidth of 20km"
+  ) +
+  theme_ipsum_rc() +
+  theme(
+    legend.position = "none",
+    plot.background = element_rect(fill = "white", color = NA),
+    legend.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA),
+    axis.text = element_text(color = "white"),
+    axis.ticks = element_line(color = "white"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    plot.caption = element_text(hjust = 0)
+  )
+
+ggsave("ex1_1.png", p1, dpi = 500)
+
+# -ikon
+p2 <- endings_kernels %>%
   # filter(ending %in% c("-hof", "-matt", "-wil", "-ikon", "-berg", "-mont")) %>%
   # mutate(ending = factor(ending, levels = c("-hof", "-matt", "-wil", "-ikon", "-berg", "-mont"))) %>%
   filter(ending == "-ikon") %>%
@@ -187,10 +219,10 @@ Method: btb::kernelSmoothing with a grid resolution of 1km and a bandwidth of 20
     plot.caption = element_text(hjust = 0)
   )
 
-ggsave("ikon.png", p1, width = 11.1/1.5, height = 8.33/1.5, dpi = 500)
+ggsave("ex1_2.png", p2, dpi = 500)
 
 # Suffix for mountain in german and french
-p2 <- endings_kernels %>%
+p3 <- endings_kernels %>%
   filter(ending %in% c("-berg", "-mont")) %>%
   rename("Suffix" = "ending") %>%
   group_by(Suffix) %>%
@@ -223,4 +255,4 @@ Method: btb::kernelSmoothing with a grid resolution of 1km and a bandwidth of 20
     plot.caption = element_text(hjust = 0)
   )
 
-ggsave("berg_v_mont.png", p2, width = 11.1/1.5, height = 8.33/1.5, dpi = 500)
+ggsave("ex1_3.png", p3, dpi = 500)

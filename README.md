@@ -84,22 +84,23 @@ swissgd::download_geodata("ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill"
 Displays a description of all data provided via the [Spatial Temporal Asset Catalog (STAC) REST Interface](https://data.geo.admin.ch/api/stac/v0.9/collections) on the geo-information platform (currently 10).
 
 ``` r
-swissgd::get_stac_collections()
+swissgd::get_stac_collections() %>% 
+  dplyr::select(1:3)
 
-#> # A tibble: 10 x 11
-#>    title id    description udated bbox1 bbox2 bbox3 bbox4 interval1 interval2
-#>    <chr> <chr> <chr>       <chr>  <dbl> <dbl> <dbl> <dbl> <chr>     <chr>    
-#>  1 swis~ ch.s~ swissALTI3~ 2021-~  5.95  45.7 10.5   47.8 2019-01-~ 2020-01-~
-#>  2 swis~ ch.s~ swissTLM3D~ 2021-~  5.35  45.6 11.5   48.3 2020-03-~ 2020-03-~
-#>  3 swis~ ch.s~ swissBUILD~ 2021-~  5.94  45.8 10.5   47.8 2018-07-~ 2020-10-~
-#>  4 SWIS~ ch.s~ The orthop~ 2021-~  5.95  45.8 10.5   47.8 2017-01-~ 2020-01-~
-#>  5 Nati~ ch.s~ The 1:10,0~ 2021-~  5.88  45.8 10.6   47.8 2020-01-~ 2020-01-~
-#>  6 Nati~ ch.s~ The Nation~ 2021-~  5.87  45.7 10.9   47.9 2007-01-~ 2018-01-~
-#>  7 Nati~ ch.s~ The Nation~ 2021-~  5.87  45.8 10.7   47.9 1984-01-~ 2018-01-~
-#>  8 Nati~ ch.s~ The Nation~ 2021-~  5.85  45.7 11.4   47.9 2012-01-~ 2019-01-~
-#>  9 Nati~ ch.s~ The Nation~ 2021-~  5.60  45.5 10.7   48.0 2019-01-~ 2019-01-~
-#> 10 swis~ ch.s~ swissSURFA~ 2021-~  5.95  45.8  9.68  47.8 2015-01-~ 2020-01-~
-#> # ... with 1 more variable: license <chr>
+#> # A tibble: 11 x 3
+#>    title                   id                  description                      
+#>    <chr>                   <chr>               <chr>                            
+#>  1 swissALTI3D             ch.swisstopo.swiss~ swissALTI3D is an extremely prec~
+#>  2 swissTLM3D              ch.swisstopo.swiss~ swissTLM3D is the large-scale to~
+#>  3 swissBUILDINGS3D 2.0    ch.swisstopo.swiss~ swissBUILDINGS3D 2.0 is a vector~
+#>  4 SWISSIMAGE 10 cm, digi~ ch.swisstopo.swiss~ The orthophoto mosaic SWISSIMAGE~
+#>  5 National Map 1:10'000 ~ ch.swisstopo.lande~ The 1:10,000 national map is swi~
+#>  6 National Map 1:50'000   ch.swisstopo.pixel~ The National Map 1:50,000 is a t~
+#>  7 National Map 1:25'000   ch.swisstopo.pixel~ The National Map 1:25,000 is a t~
+#>  8 National Map 1:100'000  ch.swisstopo.pixel~ The National Map 1:100,000 is a ~
+#>  9 National Map 1:200'000  ch.swisstopo.pixel~ The National Map 1:200,000 is a ~
+#> 10 swissSURFACE3D          ch.swisstopo.swiss~ swissSURFACE3D models all natura~
+#> 11 swissSURFACE3D Raster   ch.swisstopo.swiss~ swissSURFACE3D Raster is a digit~
 ```
 
 ## `get_stac_assets`
@@ -135,14 +136,13 @@ swissgd::download_stac_assets(res)
 # Examples
 
 ## Spatial distribution of place name suffixes
+### Setup
 **Idea**: Examine and visualise the spatial distribution of place name suffixes using spatial kernel density estimation.
 **Script**: [ex1_swissnames.R](https://github.com/zumbov2/swissgd/blob/main/examples/ex1_swissnames.R)  
 **Datasets**: ch.swisstopo.swissnames3d, ch.swisstopo.swissboundaries3d-land-flaeche.fill  
 **Packages**: `sf`, `raster`, `btb`, `ggplot2` and friends
 
-### Results
-<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_ikon.png" width="600">  
-<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_berg_mont.png" width="600">  
-
-
-
+### Some Results
+<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_1.png" width="600">  
+<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_2.png" width="600">  
+<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_3.png" width="600">  
