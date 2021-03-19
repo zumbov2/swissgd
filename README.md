@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/zumbov2/swissgd.svg?branch=master)](https://travis-ci.org/zumbov2/swissgd)
 
 # swissgd
-This R package is an interface to parts of the [Geo-Information Platform of the Swiss Confederation](https://www.geo.admin.ch/en/geo-services/geo-services/download-services.html) and **work-in-progress**. It provides functions to search and download data from [data.geo.admin.ch](https://data.geo.admin.ch/) and wraps around the [Spatial Temporal Asset Catalog (STAC) API](https://data.geo.admin.ch/api/stac/v0.9/).
+This R package is an interface to parts of the [Geo-Information Platform of the Swiss Confederation](https://www.geo.admin.ch/en/geo-services/geo-services/download-services.html) and **work-in-progress**. It provides functions to search and download geodata from [data.geo.admin.ch](https://data.geo.admin.ch/) and wraps around the [Spatial Temporal Asset Catalog (STAC) API](https://data.geo.admin.ch/api/stac/v0.9/).
  
 The acquisition and use of data or services is free of charge, subject to the provisions on fair use. For more information, please see the [Terms of Use](https://www.geo.admin.ch/en/geo-services/geo-services/terms-of-use.html).
 
@@ -132,7 +132,14 @@ res <- swissgd::get_stac_assets(
 swissgd::download_stac_assets(res)
 ```
 
+# Examples
 
+## Spatial distribution of place name suffixes
+*Datasets:* ch.swisstopo.swissnames3d, ch.swisstopo.swissboundaries3d-land-flaeche.fill
+*Packages:* `sf`, `raster`, `btb`, `ggplot2` etc.
+
+<img src="https://github.com/zumbov2/swissgd/blob/master/examples/ex1_ikon.png" width="300">  
+<img src="https://github.com/zumbov2/swissgd/blob/master/examples/ex1_berg_mont.png" width="300">  
 
 
 
