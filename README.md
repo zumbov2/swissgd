@@ -67,7 +67,7 @@ swissgd::search_geodata("Alti")
 ```
 
 ## `show_metadata` and `show_preview`
-These functions can be used to visit the entry of a dataset in the [Swiss Geometadata Catalogue](https://www.geocat.admin.ch) and preview the data on [mapping platform of the Swiss Confederation](https://map.geo.admin.ch).
+These functions can be used to visit the entry of a dataset in the [Swiss Geometadata Catalogue](https://www.geocat.admin.ch) and preview the data on the mapping platform of the Swiss Confederation](https://map.geo.admin.ch).
 ``` r
 swissgd::show_metadata("ch.are.erreichbarkeit-oev")
 swissgd::show_preview("ch.are.erreichbarkeit-oev")
