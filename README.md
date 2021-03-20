@@ -19,7 +19,7 @@ devtools::install_github("zumbov2/swissgd")
 # Functions
 
 ## `get_available_geodata`
-Retrieves the names of all available datasets (currently 545) and returns the function (`download_geodata()` or `get_stac_assets()`) to obtain them.
+Retrieves the names of all available datasets (*currently 545*) and returns the function (`download_geodata()` or `get_stac_assets()`) to obtain them.
 
 ``` r
 swissgd::get_available_geodata()
@@ -81,7 +81,7 @@ swissgd::download_geodata("ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill"
 ```
 
 ## `get_stac_collections`
-Displays a description of all data provided via the [Spatial Temporal Asset Catalog (STAC) REST Interface](https://data.geo.admin.ch/api/stac/v0.9/collections) on the geo-information platform (currently 10).
+Displays a description of all data provided via the [Spatial Temporal Asset Catalog (STAC) REST Interface](https://data.geo.admin.ch/api/stac/v0.9/collections) on the geo-information platform (*currently 10*).
 
 ``` r
 swissgd::get_stac_collections() %>% 
@@ -137,7 +137,7 @@ swissgd::download_stac_assets(res)
 
 ## Spatial distribution of place name suffixes
 ### Setup
-**Idea**: Examine and visualise the spatial distribution of place name suffixes using spatial kernel density estimation.
+**Idea**: Examine and visualise the spatial distribution of place name suffixes using spatial kernel density estimation.  
 **Datasets**: ch.swisstopo.swissnames3d, ch.swisstopo.swissboundaries3d-land-flaeche.fill  
 **Packages**: `sf`, `raster`, `btb`, `ggplot2` and friends  
 **Script**: [ex1_swissnames.R](https://github.com/zumbov2/swissgd/blob/main/examples/ex1_swissnames.R)  
