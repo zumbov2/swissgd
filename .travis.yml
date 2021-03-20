@@ -1,7 +1,24 @@
 language: R
-sudo: false
 cache: packages
-r:
-- oldrel
-- release
-- devel
+sudo: true
+
+env:
+  global:
+  - _R_CHECK_FORCE_SUGGESTS_=false
+
+addons:
+  apt:
+    update: true
+    packages:
+      - libudunits2-dev
+
+before_install:
+  - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
+  - sudo apt-get --yes --force-yes update -qq
+  - sudo apt install libudunits2-dev
+
+matrix:
+  include:
+  - r: devel
+  - r: release
+  - r: oldrel
