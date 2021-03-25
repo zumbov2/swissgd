@@ -30,12 +30,14 @@ ply <- sf::st_read("swissNAMES3D_LV03/shp_LV03_LN02/swissNAMES3D_PLY.shp")
 
 places <- ply %>%
   filter(OBJEKTART == "Ort") %>%
-  filter(STATUS == "offiziell")
+  filter(STATUS == "offiziell") 
 
 # Place name endings ---------------------------------------------------------
 
 # Get 2 to 7 letter place name endings
 endings <- places %>%
+  st_drop_geometry() %>% 
+  mutate(NAME = as.character(NAME)) %>% 
   mutate(chars = nchar(NAME)) %>%
   mutate(
     ending2 = stringr::str_sub(NAME, chars-1, chars),
@@ -44,7 +46,7 @@ endings <- places %>%
     ending5 = stringr::str_sub(NAME, chars-4, chars),
     ending6 = stringr::str_sub(NAME, chars-5, chars),
     ending7 = stringr::str_sub(NAME, chars-6, chars)
-    ) %>%
+  ) %>%
   select(starts_with("ending")) %>%
   pivot_longer(starts_with("ending")) %>%
   group_by(name, value) %>%
@@ -84,7 +86,7 @@ folder <- "swissboundaries3d.zip"
 download.file(
   "https://data.geo.admin.ch/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill/shp/2056/ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill.zip",
   folder
-  )
+)
 unzip(folder, exdir = "swissboundaries3d")
 file.remove(folder)
 
@@ -97,12 +99,12 @@ ch <- ch %>% filter(NAME == "Schweiz")
 # Strongly inspired by
 # https://www.r-bloggers.com/2019/05/kernel-spatial-smoothing-transforming-points-pattern-to-continuous-coverage/
 get_spatial_smooting <- function(ending, x, bounding, res, bw, crs = 2056) {
-
-  cat(ending, "\n")
-
+  
+  cat("\n", ending, "\n")
+  
   # Bounding
   bx <- sf::st_bbox(bounding)
-
+  
   # Make grid
   bounding_coords <- bounding %>%
     sf::st_make_grid(
@@ -111,13 +113,13 @@ get_spatial_smooting <- function(ending, x, bounding, res, bw, crs = 2056) {
         plyr::round_any(bx[1] - bw, res, floor),
         plyr::round_any(bx[2] - bw, res, floor)),
       what = "centers"
-      ) %>%
+    ) %>%
     sf::st_sf() %>%
     sf::st_join(bounding, join = st_intersects, left = F) %>%
     sf::st_coordinates() %>%
     tibble::as_tibble() %>%
     dplyr::select(x = X, y = Y)
-
+  
   # Compute Kernel
   kernel <- x %>%
     cbind(., st_coordinates(.)) %>%
@@ -130,13 +132,13 @@ get_spatial_smooting <- function(ending, x, bounding, res, bw, crs = 2056) {
       iBandwidth = bw,
       vQuantiles = NULL,
       dfCentroids = bounding_coords
-      )
-
+    )
+  
   names(kernel)[3] <- "density"
   kernel$ending <- paste0("-", ending)
-
+  
   return(kernel)
-
+  
 }
 
 # Spatial Kernel Smooting for all endings
@@ -147,7 +149,7 @@ endings_kernels <- purrr::map_dfr(
   bounding = ch,
   res = 1000,
   bw = 20000
-  )
+)
 
 # Visualize ----------------------------------------------------------------
 
@@ -164,7 +166,7 @@ p1 <- endings_kernels %>%
     title = "Distribution of the place name suffix -hof",
     subtitle = "Spatial kernel density estimation",
     caption = "Datasets: ch.swisstopo.swissnames3d, ch.swisstopo.swissboundaries3d
-Method: btb::kernelSmoothing with a grid resolution of 1km and a bandwidth of 20km"
+    Method: btb::kernelSmoothing with a grid resolution of 1km and a bandwidth of 20km"
   ) +
   theme_ipsum_rc() +
   theme(
@@ -202,7 +204,7 @@ p2 <- endings_kernels %>%
     title = "Distribution of the place name suffix -ikon",
     subtitle = "Spatial kernel density estimation",
     caption = "Datasets: ch.swisstopo.swissnames3d, ch.swisstopo.swissboundaries3d
-Method: btb::kernelSmoothing with a grid resolution of 1km and a bandwidth of 20km"
+    Method: btb::kernelSmoothing with a grid resolution of 1km and a bandwidth of 20km"
   ) +
   theme_ipsum_rc() +
   theme(
@@ -237,7 +239,7 @@ p3 <- endings_kernels %>%
     title = "Distribution of the place name suffixes -berg and -mont",
     subtitle = "Spatial kernel density estimation",
     caption = "Datasets: ch.swisstopo.swissnames3d, ch.swisstopo.swissboundaries3d
-Method: btb::kernelSmoothing with a grid resolution of 1km and a bandwidth of 20km"
+    Method: btb::kernelSmoothing with a grid resolution of 1km and a bandwidth of 20km"
   ) +
   theme_ipsum_rc() +
   theme(
