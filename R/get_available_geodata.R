@@ -54,6 +54,8 @@ get_available_geodata <- function(include_links = FALSE) {
     tidyr::pivot_wider(names_from = name, values_from = attr) %>%
     dplyr::mutate(id = 1:dplyr::n())
 
+  names(res1) <- c("id", "download", "preview", "metadata", "STAC_API")
+
   res2 <- res1 %>%
     dplyr::mutate(
       name = stringr::str_split(metadata, "="),

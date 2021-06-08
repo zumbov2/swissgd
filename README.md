@@ -8,7 +8,7 @@ This R package is an interface to parts of the [Geo-Information Platform of the 
 The acquisition and use of data or services is free of charge, subject to the provisions on fair use. For more information, please see the [Terms of Use](https://www.geo.admin.ch/en/geo-services/geo-services/terms-of-use.html).
 
 ## Installation
-Install from GitHub for a regularly updated version (latest: 0.1.0):
+Install from GitHub for a regularly updated version (latest: 0.1.1):
 
 ```r
 install.packages("devtools")

@@ -74,7 +74,7 @@ download_geodata <- function(dataset, path, unzip = TRUE, available_geodata) {
   p0 <- paste0(path, "/", res[["name"]])
   p1 <- paste0(p0, ".zip")
 
-  purrr::walk2(dl, p1, utils::download.file)
+  purrr::walk2(dl, p1, utils::download.file, mode = "wb")
   if (unzip) purrr::walk2(p1, p0, function(x, y) unzip(x, exdir = y))
   if (unzip) file.remove(p1)
 
