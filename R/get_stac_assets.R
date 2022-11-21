@@ -12,7 +12,9 @@
 #' @param collection_id character string for selecting a dataset. Use
 #'     \code{get_stac_collections} to obtain all available datasets.
 #' @param lon longitude of a given point. WGS84, LV03 and LV95 coordinates are possible.
+#'     Default value refers to the geographical center of Switzerland.
 #' @param lat latitude of a given point. WGS84, LV03 and LV95 coordinates are possible.
+#'     Default value refers to the geographical center of Switzerland.
 #' @param api link to the latest query endpoint of the STAC API.
 #'
 #' @details The acquisition and use of data or services is free of charge,
@@ -31,7 +33,7 @@
 #'
 #' @export
 #'
-get_stac_assets <- function(collection_id, lon, lat, api = "https://data.geo.admin.ch/api/stac/v0.9/collections") {
+get_stac_assets <- function(collection_id, lon = 660158, lat = 183641, api = "https://data.geo.admin.ch/api/stac/v0.9/collections") {
 
   # CRS
   .crs <- dplyr::case_when(

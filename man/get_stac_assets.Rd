@@ -6,8 +6,8 @@
 \usage{
 get_stac_assets(
   collection_id,
-  lon,
-  lat,
+  lon = 660158,
+  lat = 183641,
   api = "https://data.geo.admin.ch/api/stac/v0.9/collections"
 )
 }
@@ -15,9 +15,11 @@ get_stac_assets(
 \item{collection_id}{character string for selecting a dataset. Use
 \code{get_stac_collections} to obtain all available datasets.}
 
-\item{lon}{longitude of a given point. WGS84, LV03 and LV95 coordinates are possible.}
+\item{lon}{longitude of a given point. WGS84, LV03 and LV95 coordinates are possible.
+Default value refers to the geographical center of Switzerland.}
 
-\item{lat}{latitude of a given point. WGS84, LV03 and LV95 coordinates are possible.}
+\item{lat}{latitude of a given point. WGS84, LV03 and LV95 coordinates are possible.
+Default value refers to the geographical center of Switzerland.}
 
 \item{api}{link to the latest query endpoint of the STAC API.}
 }
