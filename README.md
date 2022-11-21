@@ -146,3 +146,13 @@ swissgd::download_stac_assets(res)
 <img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/example1/ex1_1.png" width="600">  
 <img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/example1/ex1_2.png" width="600">  
 <img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/example1/ex1_3.png" width="600">  
+
+## Reachability by public transport
+### Setup
+**Goal**: Testing the newly available data via the STAC API.
+**Datasets**: ch.are.erreichbarkeit-oev
+**Packages**: `sf` and `ggplot2`
+**Script**: [ex2.R](https://github.com/zumbov2/swissgd/blob/main/examples/example2/ex2.R)  
+
+### Results
+<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/example2/ex2_map.png" width="600">   
