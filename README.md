@@ -19,25 +19,25 @@ devtools::install_github("zumbov2/swissgd")
 # Functions
 
 ## `get_available_geodata`
-Retrieves the names of all available datasets (*currently 545*) and returns the function (`download_geodata()` or `get_stac_assets()`) to obtain them.
+Retrieves the names of all available datasets (*currently 570*) and returns the function (`download_geodata()` or `get_stac_assets()`) to obtain them.
 
 ``` r
 swissgd::get_available_geodata()
 
-#> # A tibble: 545 x 2
-#>    name                                     retrieval_function         
-#>    <chr>                                    <chr>                      
-#>  1 ch.are.agglomerationsverkehr             swissgd::download_geodata()
-#>  2 ch.are.alpenkonvention                   swissgd::download_geodata()
-#>  3 ch.are.belastung-personenverkehr-bahn    swissgd::download_geodata()
-#>  4 ch.are.belastung-personenverkehr-strasse swissgd::download_geodata()
-#>  5 ch.are.erreichbarkeit-miv                swissgd::download_geodata()
-#>  6 ch.are.erreichbarkeit-oev                swissgd::download_geodata()
-#>  7 ch.are.gemeindetypen                     swissgd::download_geodata()
-#>  8 ch.are.gueteklassen_oev                  swissgd::download_geodata()
-#>  9 ch.are.landschaftstypen                  swissgd::download_geodata()
-#> 10 ch.are.reisezeit-agglomerationen-miv     swissgd::download_geodata()
-#> # ... with 535 more rows
+#> # A tibble: 570 x 2
+#>    name                                             retrieval_function        
+#>    <chr>                                            <chr>                     
+#>  1 ch.are.agglomerationsverkehr                     swissgd::get_stac_assets()
+#>  2 ch.are.alpenkonvention                           swissgd::get_stac_assets()
+#>  3 ch.are.belastung-personenverkehr-bahn            swissgd::get_stac_assets()
+#>  4 ch.are.belastung-personenverkehr-bahn_zukunft    swissgd::get_stac_assets()
+#>  5 ch.are.belastung-personenverkehr-strasse         swissgd::get_stac_assets()
+#>  6 ch.are.belastung-personenverkehr-strasse_zukunft swissgd::get_stac_assets()
+#>  7 ch.are.erreichbarkeit-miv                        swissgd::get_stac_assets()
+#>  8 ch.are.erreichbarkeit-oev                        swissgd::get_stac_assets()
+#>  9 ch.are.gemeindetypen                             swissgd::get_stac_assets()
+#> 10 ch.are.gueteklassen_oev                          swissgd::get_stac_assets()
+#> # ... with 560 more rows
 ```
 
 ## `search_geodata`
@@ -49,16 +49,16 @@ swissgd::search_geodata(pattern = "ÖV")
 #> # A tibble: 6 x 2
 #>   name                                     retrieval_function         
 #>   <chr>                                    <chr>                      
-#> 1 ch.are.erreichbarkeit-oev                swissgd::download_geodata()
-#> 2 ch.are.gueteklassen_oev                  swissgd::download_geodata()
-#> 3 ch.are.reisezeit-agglomerationen-oev     swissgd::download_geodata()
-#> 4 ch.are.reisezeit-oev                     swissgd::download_geodata()
-#> 5 ch.bav.haltestellen-oev                  swissgd::download_geodata()
+#> 1 ch.are.erreichbarkeit-oev                swissgd::get_stac_assets() 
+#> 2 ch.are.gueteklassen_oev                  swissgd::get_stac_assets() 
+#> 3 ch.are.reisezeit-agglomerationen-oev     swissgd::get_stac_assets() 
+#> 4 ch.are.reisezeit-oev                     swissgd::get_stac_assets() 
+#> 5 ch.bav.haltestellen-oev                  swissgd::get_stac_assets() 
 #> 6 ch.bav.kataster-belasteter-standorte-oev swissgd::download_geodata()
 ```
 
 ``` r
-swissgd::search_geodata("Alti")
+swissgd::search_geodata(pattern = "Alti")
 
 #> # A tibble: 1 x 2
 #>   name                     retrieval_function        
@@ -81,26 +81,25 @@ swissgd::download_geodata("ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill"
 ```
 
 ## `get_stac_collections`
-Displays a description of all data provided via the [Spatial Temporal Asset Catalog (STAC) REST Interface](https://data.geo.admin.ch/api/stac/v0.9/collections) on the geo-information platform (*currently 10*).
+Displays a description of all data provided via the [Spatial Temporal Asset Catalog (STAC) REST Interface](https://data.geo.admin.ch/api/stac/v0.9/collections) on the geo-information platform (*currently 100*).
 
 ``` r
-swissgd::get_stac_collections() %>% 
-  dplyr::select(1:3)
+swissgd::get_stac_collections() %>% dplyr::select(title, id, description)
 
-#> # A tibble: 11 x 3
-#>    title                   id                  description                      
-#>    <chr>                   <chr>               <chr>                            
-#>  1 swissALTI3D             ch.swisstopo.swiss~ swissALTI3D is an extremely prec~
-#>  2 swissTLM3D              ch.swisstopo.swiss~ swissTLM3D is the large-scale to~
-#>  3 swissBUILDINGS3D 2.0    ch.swisstopo.swiss~ swissBUILDINGS3D 2.0 is a vector~
-#>  4 SWISSIMAGE 10 cm, digi~ ch.swisstopo.swiss~ The orthophoto mosaic SWISSIMAGE~
-#>  5 National Map 1:10'000 ~ ch.swisstopo.lande~ The 1:10,000 national map is swi~
-#>  6 National Map 1:50'000   ch.swisstopo.pixel~ The National Map 1:50,000 is a t~
-#>  7 National Map 1:25'000   ch.swisstopo.pixel~ The National Map 1:25,000 is a t~
-#>  8 National Map 1:100'000  ch.swisstopo.pixel~ The National Map 1:100,000 is a ~
-#>  9 National Map 1:200'000  ch.swisstopo.pixel~ The National Map 1:200,000 is a ~
-#> 10 swissSURFACE3D          ch.swisstopo.swiss~ swissSURFACE3D models all natura~
-#> 11 swissSURFACE3D Raster   ch.swisstopo.swiss~ swissSURFACE3D Raster is a digit~
+#> # A tibble: 100 x 3
+#>    title                                                           id    descr~1
+#>    <chr>                                                           <chr> <chr>  
+#>  1 2000-Watt Sites                                                 ch.b~ "The 2~
+#>  2 2G - GSM / EDGE availability                                    ch.b~ "The b~
+#>  3 3D buildings                                                    ch.s~ "swiss~
+#>  4 3G - UMTS / HSPA availability                                   ch.b~ "The b~
+#>  5 4G - LTE / LTE-A availability                                   ch.b~ "The b~
+#>  6 5G - NR availability                                            ch.b~ "The b~
+#>  7 Accessibility by public transport depending on travel time and~ ch.a~ "Acces~
+#>  8 Accessibility by road depending on travel time and potential a~ ch.a~ "Acces~
+#>  9 Aeronautical Chart ICAO Switzerland 1:500'000                   ch.b~ "The o~
+#> 10 Alpine Convention                                               ch.a~ "The p~
+#> # ... with 90 more rows, and abbreviated variable name 1: description
 ```
 
 ## `get_stac_assets`
@@ -108,16 +107,18 @@ Calls the STAC API on the geo-information platform and returns the download link
 
 ``` r
 swissgd::get_stac_assets(
-    collection_id = "ch.swisstopo.swissimage-dop10", 
-    lon = 645685, 
-    lat = 249287
-    )
+  collection_id = "ch.swisstopo.swissimage-dop10", 
+  lon = 645685, 
+  lat = 249287
+  )
 
 #> # A tibble: 2 x 7
-#>   type      href      created  updated  `eo:gsd` `proj:epsg` `checksum:multihas~
-#>   <chr>     <chr>     <chr>    <chr>       <dbl>       <int> <chr>              
-#> 1 image/ti~ https://~ 2021-02~ 2021-02~      2          2056 122053DCAE0197F524~
-#> 2 image/ti~ https://~ 2021-02~ 2021-02~      0.1        2056 12208825F4C065E9FA~
+#>   type                             href  created updated eo:gs~1 proj:~2 check~3
+#>   <chr>                            <chr> <chr>   <chr>     <dbl>   <int> <chr>  
+#> 1 image/tiff; application=geotiff~ http~ 2021-0~ 2021-0~     0.1    2056 122088~
+#> 2 image/tiff; application=geotiff~ http~ 2021-0~ 2021-0~     2      2056 122053~
+#> # ... with abbreviated variable names 1: `eo:gsd`, 2: `proj:epsg`,
+#> #   3: `checksum:multihash`
 ```
 
 ## `download_stac_assets`
