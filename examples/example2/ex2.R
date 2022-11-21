@@ -4,11 +4,11 @@ library(sf)
 library(ggplot2)
 library(hrbrthemes)
 
-# Search data on accessibility
+# Search data on reachability
 reach <- search_geodata("erreichbarkeit")
 show_preview("ch.are.erreichbarkeit-oev")
 
-# Download data on accessibility by public transport
+# Download data on reachability by public transport
 get_stac_assets("ch.are.erreichbarkeit-oev") %>% download_stac_assets()
 
 # Check available layers
