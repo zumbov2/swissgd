@@ -149,9 +149,9 @@ swissgd::download_stac_assets(res)
 
 ## Reachability by public transport
 ### Setup
-**Goal**: Testing the newly available data via the STAC API.
-**Datasets**: ch.are.erreichbarkeit-oev
-**Packages**: `sf` and `ggplot2`
+**Goal**: Testing the newly available data via the STAC API.  
+**Datasets**: ch.are.erreichbarkeit-oev  
+**Packages**: `sf` and `ggplot2`  
 **Script**: [ex2.R](https://github.com/zumbov2/swissgd/blob/main/examples/example2/ex2.R)  
 
 ### Results
