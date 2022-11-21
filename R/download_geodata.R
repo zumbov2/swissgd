@@ -20,8 +20,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Show all available records for the search term Agglomerations
-#' download_geodata("ch.are.reisezeit-oev")
+#' # Download data on building lines for motorways
+#' download_geodata("ch.astra.baulinien-nationalstrassen")
 #' }
 #'
 #' @export

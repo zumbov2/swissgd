@@ -14,7 +14,7 @@ if(getRversion() >= "2.15.1") {
 
   utils::globalVariables(
     c(
-      "name", "id", "metadata", "download", "STAC_API",
+      "name", "type", "metadata", "download", "STAC_API",
       "retrieval_function", "extent_spatial", "extent_temporal"
       )
   )

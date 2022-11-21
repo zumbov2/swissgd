@@ -4,14 +4,14 @@
 #'     of the Swiss Confederation (\url{https://data.geo.admin.ch/}).
 #'
 #' @importFrom httr GET content
-#' @importFrom rvest html_nodes html_text
-#' @importFrom xml2 xml_attrs
-#' @importFrom purrr map_chr
+#' @importFrom rvest html_nodes html_text html_attr
 #' @importFrom tibble tibble
-#' @importFrom dplyr mutate select group_by slice ungroup n lag
-#' @importFrom tidyr pivot_wider
+#' @importFrom dplyr mutate arrange rename select
+#' @importFrom purrr map_chr
 #' @importFrom stringr str_replace_all str_split str_detect
+#' @importFrom tidyr fill complete pivot_wider
 #' @importFrom magrittr "%>%"
+#' @importFrom utils tail
 #'
 #' @param include_links if \code{TRUE}, links to available resources are included in the results.
 #'
@@ -32,51 +32,50 @@ get_available_geodata <- function(include_links = FALSE) {
   # Content
   pg <- httr::GET("https://data.geo.admin.ch/")
   pgc <- httr::content(pg, encoding = "UTF-8")
-
-  # Attributs
+  
+  # Nodes
   .nodes <- rvest::html_nodes(pgc, "#data > a")
-  .attrs <- purrr::map_chr(.nodes, xml2::xml_attrs)
-  .names <- rvest::html_text(.nodes)
-
-  # Results
-  res1 <- tibble::tibble(
-    name = .names,
-    attr = .attrs
-    ) %>%
+  
+  # Step 1: Build data frame from content
+  temp1 <- 
+    tibble::tibble(
+      type = rvest::html_text(.nodes),
+      url = rvest::html_attr(.nodes, "href")
+      ) %>% 
     dplyr::mutate(
-      name = stringr::str_replace_all(name, "\\s", "_"),
-      id = 1:dplyr::n(),
-      id = ifelse(!name == "download", dplyr::lag(id, 1), id),
-      id = ifelse(!name == "download", dplyr::lag(id, 1), id),
-      id = ifelse(!name == "download", dplyr::lag(id, 1), id),
-      id = ifelse(!name == "download", dplyr::lag(id, 1), id)
+      name = purrr::map_chr(url, function(x) stringr::str_split(x, "=") %>% unlist() %>% utils::tail(1)),
+      name = ifelse(!type == "metadata", NA, name)
       ) %>%
-    tidyr::pivot_wider(names_from = name, values_from = attr) %>%
-    dplyr::mutate(id = 1:dplyr::n())
-
-  names(res1) <- c("id", "download", "preview", "metadata", "STAC_API")
-
-  res2 <- res1 %>%
+    tidyr::fill(name, .direction = "up") %>% 
+    tidyr::complete(name, type) %>% 
+    dplyr::arrange(type) %>% 
+    tidyr::pivot_wider(names_from = type, values_from = url) %>%
+    
+    # Manual correction swissTLMRegio (2022-11-21)
+    dplyr::mutate(name = ifelse(name == "2a190233-498a-46c4-91ca-509a97d797a2", "swissTLMRegio", name)) %>% 
+    dplyr::arrange(name) %>% 
+    dplyr::rename("STAC_API" = "API")
+  
+  # Step 2: Add retrieval function
+  temp2 <- 
+    temp1 %>%
     dplyr::mutate(
-      name = stringr::str_split(metadata, "="),
       download = ifelse(
         !stringr::str_detect(download, "https://"),
         paste("https://data.geo.admin.ch", download, "data.zip", sep = "/"),
         download
-        )
-      ) %>%
-    dplyr::mutate(retrieval_function = ifelse(is.na(STAC_API), "swissgd::download_geodata()", "swissgd::get_stac_assets()")) %>%
-    dplyr::select(id, name, retrieval_function, names(res1)[!names(res1) %in% c("name", "id")]) %>%
-    tidyr::unnest(name) %>%
-    dplyr::group_by(id) %>%
-    dplyr::slice(2) %>%
-    dplyr::ungroup() %>%
-    dplyr::select(-id)
+        ),
+      retrieval_function = ifelse(
+        is.na(STAC_API),
+        "swissgd::download_geodata()",
+        "swissgd::get_stac_assets()"),
+      .before = 2
+      ) 
 
   # Links
-  if (!include_links) res2 <- dplyr::select(res2, name, retrieval_function)
+  if (!include_links) temp2 <- dplyr::select(temp2, name, retrieval_function)
 
   # Return
-  return(res2)
+  return(temp2)
 
 }

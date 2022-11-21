@@ -8,7 +8,7 @@ This R package is an interface to parts of the [Geo-Information Platform of the 
 The acquisition and use of data or services is free of charge, subject to the provisions on fair use. For more information, please see the [Terms of Use](https://www.geo.admin.ch/en/geo-services/geo-services/terms-of-use.html).
 
 ## Installation
-Install from GitHub for a regularly updated version (latest: 0.1.1):
+Install from GitHub for a regularly updated version (latest: 0.1.2):
 
 ```r
 install.packages("devtools")
@@ -140,9 +140,9 @@ swissgd::download_stac_assets(res)
 **Idea**: Examine and visualise the spatial distribution of place name suffixes using spatial kernel density estimation.  
 **Datasets**: ch.swisstopo.swissnames3d, ch.swisstopo.swissboundaries3d-land-flaeche.fill  
 **Packages**: `sf`, `raster`, `btb`, `ggplot2` and friends  
-**Script**: [ex1_swissnames.R](https://github.com/zumbov2/swissgd/blob/main/examples/ex1_swissnames.R)  
+**Script**: [ex1_swissnames.R](https://github.com/zumbov2/swissgd/blob/main/examples/example1/ex1_swissnames.R)  
 
 ### Some Results
-<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_1.png" width="600">  
-<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_2.png" width="600">  
-<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/ex1_3.png" width="600">  
+<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/example1/ex1_1.png" width="600">  
+<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/example1/ex1_2.png" width="600">  
+<img src="https://raw.githubusercontent.com/zumbov2/swissgd/main/examples/example1/ex1_3.png" width="600">  
