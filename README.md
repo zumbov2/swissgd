@@ -77,7 +77,7 @@ swissgd::show_preview("ch.are.erreichbarkeit-oev")
 Downloads datasets available directly from the geo-information platform. Other data can be obtained via the STAC API. See the functions below.
 
 ``` r
-swissgd::download_geodata("ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill")
+swissgd::download_geodata("ch.astra.baulinien-nationalstrassen")
 ```
 
 ## `get_stac_collections`
