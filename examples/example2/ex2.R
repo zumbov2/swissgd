@@ -20,7 +20,7 @@ reisezeit <- st_read("erreichbarkeit-oev_2056.gpkg", layer = "Reisezeit_Erreichb
 # Plot
 p1 <-
   reisezeit %>%
-  ggplot(ggplot2::aes(fill = OeV_Erreichb_EWAP ^ (1/5))) +
+  ggplot(aes(fill = OeV_Erreichb_EWAP ^ (1/5))) +
   geom_sf(size = 0) +
   coord_sf(
     xlim = st_bbox(reisezeit)[c(1, 3)],
